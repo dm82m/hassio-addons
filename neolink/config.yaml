@@ -1,0 +1,14 @@
+name: "Neolink"
+description: "Will run Neolink directly as Add-on in HAOS!"
+version: "0.0.1"
+slug: "neolink"
+init: false
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - i386
+ports:
+  8554/tcp: 8554
+map:
+  - config
