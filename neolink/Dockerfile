@@ -18,11 +18,11 @@ RUN cp neolink /bin/neolink_aarch64
 RUN chmod +x /bin/neolink_aarch64
 RUN rm release-arm64-buster.zip neolink neolink.d
 
-RUN wget https://nightly.link/thirtythreeforty/neolink/workflows/build/master/release-ubuntu-18.04.zip
-RUN unzip release-ubuntu-18.04.zip
+RUN wget https://nightly.link/thirtythreeforty/neolink/workflows/build/master/release-ubuntu-20.04.zip
+RUN unzip release-ubuntu-20.04.zip
 RUN cp neolink /bin/neolink_amd64
 RUN chmod +x /bin/neolink_amd64
-RUN rm release-ubuntu-18.04.zip neolink neolink.d
+RUN rm release-ubuntu-20.04.zip neolink neolink.d
 
 RUN wget https://nightly.link/thirtythreeforty/neolink/workflows/build/master/release-armhf-buster.zip
 RUN unzip release-armhf-buster.zip
