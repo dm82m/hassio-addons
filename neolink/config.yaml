@@ -1,6 +1,6 @@
 name: "Neolink"
 description: "Will run Neolink directly as Add-on in HAOS!"
-version: "0.0.2"
+version: "0.0.3"
 slug: "neolink"
 init: false
 arch:
@@ -8,6 +8,7 @@ arch:
   - amd64
   - armhf
   - i386
+  - armv7
 ports:
   8554/tcp: 8554
 map:
