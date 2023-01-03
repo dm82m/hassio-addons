@@ -8,6 +8,7 @@ arch:
   - amd64
   - armhf
   - i386
+  - armv7
 ports:
   8554/tcp: 8554
 map:
