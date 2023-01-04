@@ -1,6 +1,6 @@
 name: "Resol-VBus"
 description: "Will run json-live-data-server as Add-on in HAOS!"
-version: "0.0.2"
+version: "0.0.3"
 slug: "resol-vbus"
 init: false
 arch:
@@ -13,3 +13,6 @@ ports:
   3333/tcp: 3333
 map:
   - config
+uart: true
+udev: true
+usb: true

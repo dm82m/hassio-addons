@@ -3,7 +3,6 @@ FROM $BUILD_FROM
   
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash -
 
-RUN apt-get update
 RUN apt-get -y install \
   git \
   nodejs
