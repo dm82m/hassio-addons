@@ -1,5 +1,5 @@
 name: "Neolink"
-description: "Will run Neolink directly as Add-on in HAOS!"
+description: "Will run Neolink directly as Add-on in HAOS"
 version: "0.0.3"
 slug: "neolink"
 init: false
