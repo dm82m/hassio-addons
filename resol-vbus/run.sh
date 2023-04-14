@@ -7,6 +7,6 @@ echo "add-on version: 0.0.5"
 echo -n "nodejs version: " && node --version
 echo -n "npm version: " && npm --version
 echo "--- DEVICES ---"
-ls /dev/tty*
+ls /dev/ttyUSB*
 echo "--- json-live-data-server ---"
 node index.js
