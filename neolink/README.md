@@ -10,7 +10,7 @@
 
 ## About
 
-This add-on allows you to run Neolink directly on your HAOS instance. If you don't know Neolink you might not need this add-on. Details can be found [here](https://github.com/thirtythreeforty/neolink).
+This add-on allows you to run Neolink directly on your HAOS instance. If you don't know Neolink you might not need this add-on. Details can be found [here](https://github.com/QuantumEntangledAndy/neolink).
 
 ## Installation & Configuration
 
@@ -18,8 +18,8 @@ This add-on allows you to run Neolink directly on your HAOS instance. If you don
 
 1. Install this add-on in your HAOS instance.
 2. Create the configuration file named `neolink.toml` in your HAOS `/config/addons/` folder.
-   - For configuration please follow [these](https://github.com/thirtythreeforty/neolink#configuration) instructions.
-   - Sample config file can be found [here](https://raw.githubusercontent.com/thirtythreeforty/neolink/master/sample_config.toml).
+   - For configuration please follow [these](https://github.com/QuantumEntangledAndy/neolink#configuration) instructions.
+   - Sample config file can be found [here](https://raw.githubusercontent.com/QuantumEntangledAndy/neolink/master/sample_config.toml).
 3. Start the add-on and check the log output.
 
 <!--
