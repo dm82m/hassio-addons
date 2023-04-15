@@ -1,3 +1,3 @@
-#!/usr/bin/with-contenv bashio
+#!/bin/bash
 
 neolink rtsp --config /config/addons/neolink.toml
