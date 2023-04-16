@@ -1,3 +1,14 @@
 #!/bin/bash
+set -e
 
-neolink rtsp --config /config/addons/neolink.toml
+CONFIG_PATH=/data/options.json
+
+MODE=$(jq --raw-output '.mode // empty' $CONFIG_PATH)
+
+echo "--- VERSIONS ---"
+echo "add-on version: 0.0.5"
+echo -n "neolink version: " && neolink --version
+echo "neolink mode: ${MODE}"
+echo "ATTENTION: if you expected a newer Neolink version, please reinstall this Add-on!"
+echo "--- Neolink ---"
+neolink ${MODE} --config /config/addons/neolink.toml
