@@ -11,4 +11,25 @@ echo -n "neolink version: " && neolink --version
 echo "neolink mode: ${MODE}"
 echo "ATTENTION: if you expected a newer Neolink version, please reinstall this Add-on!"
 echo "--- Neolink ---"
-neolink ${MODE} --config /config/addons/neolink.toml
+
+case $MODE in
+  rtsp)
+    neolink rtsp --config /config/addons/neolink.toml
+    ;;
+
+  mqtt)
+    neolink mqtt --config /config/addons/neolink.toml
+    ;;
+
+  dual)
+    neolink rtsp --config /config/addons/neolink.toml &
+
+	neolink mqtt --config /config/addons/neolink.toml &
+
+	wait
+    ;;
+
+  *)
+    echo -n "Unknown mode option"
+    ;;
+esac

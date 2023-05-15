@@ -16,4 +16,4 @@ map:
 options:
   mode: rtsp
 schema:
-  mode: list(rtsp|mqtt)
+  mode: list(rtsp|mqtt|dual)
