@@ -1,6 +1,6 @@
 name: "Neolink"
 description: "Will run Neolink directly as Add-on in HAOS"
-version: "0.0.5"
+version: "0.0.6"
 slug: "neolink"
 init: false
 arch:
