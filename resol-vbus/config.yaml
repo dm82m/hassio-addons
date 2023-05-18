@@ -1,6 +1,6 @@
 name: "Resol-VBus"
 description: "Will run json-live-data-server as Add-on in HAOS"
-version: "0.0.5"
+version: "0.0.6"
 slug: "resol-vbus"
 init: false
 arch:
