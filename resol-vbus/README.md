@@ -10,7 +10,7 @@
 
 ## About
 
-This add-on allows you to run resol-vbus [json-live-data-server](https://github.com/danielwippermann/resol-vbus/tree/master/examples/json-live-data-server) directly on your HAOS instance. This is needed if you are using a Resol VBus/LAN or VBus/USB device and want to use the [hass-Deltasol-KM2](https://github.com/dm82m/hass-Deltasol-KM2) component to get your Resol data into Home Assistant.
+This add-on allows you to run resol-vbus [json-live-data-server](https://github.com/danielwippermann/resol-vbus/tree/master/examples/json-live-data-server) directly on your HAOS instance. This is needed if you are using a Resol KM1, VBus/LAN or VBus/USB device and want to use the [hass-Deltasol-KM2](https://github.com/dm82m/hass-Deltasol-KM2) component to get your Resol data into Home Assistant.
 
 ## Installation & Configuration
 
@@ -21,14 +21,6 @@ This add-on allows you to run resol-vbus [json-live-data-server](https://github.
    - For configuration please follow [these](https://github.com/danielwippermann/resol-vbus/tree/master/examples/json-live-data-server#configuration) instructions.
    - Sample config file can be found [here](https://raw.githubusercontent.com/danielwippermann/resol-vbus/master/examples/json-live-data-server/config.js.example).
 3. Start the add-on and check the log output.
-
-### VBus/LAN
-
-Functionality confirmed! :)
-
-### VBus/USB
-
-Functionality not confirmed yet, please contribute [here](https://github.com/dm82m/hassio-addons/issues/8).
 
 <!--
 
