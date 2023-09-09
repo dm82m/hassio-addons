@@ -8,6 +8,8 @@
 
 This repository contains the following add-ons
 
+### [Evcc-Nightly](./evcc-nightly)
+
 ### [Neolink](./neolink)
 
 ### [Resol-VBus](./resol-vbus)
