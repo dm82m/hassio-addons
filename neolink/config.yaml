@@ -1,6 +1,6 @@
 name: "Neolink"
 description: "Will run Neolink directly as Add-on in HAOS"
-version: "0.0.7"
+version: "0.0.8"
 slug: "neolink"
 init: false
 arch:
@@ -15,5 +15,7 @@ map:
   - config
 options:
   mode: rtsp
+  log: info
 schema:
   mode: list(rtsp|mqtt|dual)
+  log: list(info|warn|error|debug)

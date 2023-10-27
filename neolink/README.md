@@ -22,6 +22,7 @@ This add-on allows you to run Neolink directly on your HAOS instance. If you don
    - For configuration please follow [these](https://github.com/QuantumEntangledAndy/neolink#configuration) instructions.
    - Sample config file can be found [here](https://raw.githubusercontent.com/QuantumEntangledAndy/neolink/master/sample_config.toml).
 4. Start the add-on and check the log output.
+5. The log level defaults to `INFO`. You can set it to error, warn, info, or debug. Most users can leave it at info, but debug can be helpful if you have issues.
 
 <!--
 
