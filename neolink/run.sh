@@ -10,6 +10,7 @@ echo "--- VERSIONS ---"
 echo "add-on version: 0.0.7"
 echo -n "neolink version: " && neolink --version
 echo "neolink mode: ${MODE}"
+echo "neolink log: ${LOG}"
 echo "ATTENTION: if you expected a newer Neolink version, please reinstall this Add-on!"
 echo "--- Neolink ---"
 
@@ -18,7 +19,7 @@ case $LOG in
     export RUST_LOG="neolink=debug"
     ;;
   info)
-    export RUST_LOG="neolink=debug"
+    export RUST_LOG="neolink=info"
     ;;
   warn)
     export RUST_LOG="neolink=warn"
@@ -27,7 +28,7 @@ case $LOG in
     export RUST_LOG="neolink=error"
     ;;
   *)
-    echo "Unknown log level"
+    echo -n "Unknown log level"
     ;;
 esac
 
