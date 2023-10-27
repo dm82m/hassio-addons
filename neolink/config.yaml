@@ -15,5 +15,6 @@ map:
   - config
 options:
   mode: rtsp
+  log: info
 schema:
   mode: list(rtsp|mqtt|dual)
