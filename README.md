@@ -12,4 +12,6 @@ This repository contains the following add-ons
 
 ### [Neolink](./neolink)
 
+### [Neolink (Dev)](./neolink-dev)
+
 ### [Resol-VBus](./resol-vbus)
