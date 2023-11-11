@@ -1,4 +1,4 @@
-FROM quantumentangledandy/neolink:latest
+FROM quantumentangledandy/neolink:v0.6.2
 
 RUN apt-get update && \
     apt-get install -y \
