@@ -1,0 +1,21 @@
+name: "Neolink (Dev)"
+description: "Will run the Development version of Neolink directly as Add-on in HAOS"
+version: "0.0.1"
+slug: "neolink"
+init: false
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - i386
+  - armv7
+ports:
+  8554/tcp: 8554
+map:
+  - config
+options:
+  mode: rtsp
+  log: info
+schema:
+  mode: list(rtsp|mqtt|dual)
+  log: list(info|warn|error|debug)
