@@ -1,7 +1,7 @@
 name: "Neolink (Dev)"
 description: "Will run the Development version of Neolink directly as Add-on in HAOS"
 version: "0.0.1"
-slug: "neolink"
+slug: "neolink_dev"
 init: false
 arch:
   - aarch64
