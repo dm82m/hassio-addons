@@ -1,6 +1,6 @@
 name: "Neolink"
 description: "Will run Neolink directly as Add-on in HAOS"
-version: "0.0.9"
+version: "0.0.10"
 slug: "neolink"
 init: false
 arch:
@@ -12,7 +12,10 @@ arch:
 ports:
   8554/tcp: 8554
 map:
-  - config
+  - type: addon_config
+    read_only: False
+  - type: homeassistant_config
+    read_only: False
 options:
   mode: rtsp
   log: info

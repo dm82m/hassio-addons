@@ -6,8 +6,14 @@ CONFIG_PATH=/data/options.json
 MODE=$(jq --raw-output '.mode // empty' $CONFIG_PATH)
 LOG=$(jq --raw-output '.log // empty' $CONFIG_PATH)
 
+if [ -f "/homeassistant/addons/neolink.toml" ]; then
+    echo "Migrating '/homeassistant/addons/neolink.toml' to '/addon_configs/<slug>_neolink-latest/neolink.toml'"
+    cp /homeassistant/addons/neolink.toml /config/
+    mv /homeassistant/addons/neolink.toml /homeassistant/addons/neolink.toml.migrated
+fi
+
 echo "--- VERSIONS ---"
-echo "add-on version: 0.0.1"
+echo "add-on version: 0.0.2"
 echo -n "neolink version: " && neolink --version
 echo "neolink mode: ${MODE}"
 echo "neolink log: ${LOG}"
@@ -34,15 +40,15 @@ esac
 
 case $MODE in
   rtsp)
-    neolink rtsp --config /config/addons/neolink.toml
+    neolink rtsp --config /config/neolink.toml
     ;;
 
   mqtt)
-    neolink mqtt --config /config/addons/neolink.toml
+    neolink mqtt --config /config/neolink.toml
     ;;
 
   dual)
-    neolink mqtt-rtsp --config /config/addons/neolink.toml
+    neolink mqtt-rtsp --config /config/neolink.toml
     ;;
 
   *)
