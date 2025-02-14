@@ -1,16 +1,21 @@
 [![buy_me_a_coffee](https://img.shields.io/badge/If%20you%20like%20it-Buy%20me%20a%20coffee-yellow.svg?style=for-the-badge)](https://www.buymeacoffee.com/dirkmaucher)
 
-# Evcc-Nightly
+# :tada: Good news!
+I have implemented an official evcc nightly support for Home Assistant in the evcc project itself. Please migrate to it!
 
-![Supports aarch64 Architecture][aarch64-shield]
-![Supports amd64 Architecture][amd64-shield]
-![Supports armhf Architecture][armhf-shield]
-![Supports armv7 Architecture][armv7-shield]
-![Supports i386 Architecture][i386-shield]
+# Why should I migrate?
 
-## About
+:rocket: First an easily: the old addon is gone. And more importantly: The new addon has update notficiations included, that means: whenever there is an new nightly, Home Assistant will tell you and you can run the upgrade! :)
 
-This add-on allows you to use the latest nightly of [evcc](https://github.com/evcc-io/evcc). Important: you need to uninstall and reinstall the addon if you want to update to the latest nightly version. Home Assistant won't show any updates for this add-on. You need to take care on your own.
+# How can I migrate?
+1. Remember the paths you used in the old nightly addon for your configuration and db file, you need them in the new nightly addon.
+   1. In case that you had your db file in `/data/` (default), you need to manually extract the db file from this old addon and put it into the new nightly addon. A guide how to do that, can be found [here](https://github.com/evcc-io/hassio-addon?tab=readme-ov-file#how-to-find-and-copy-dataevccdb).
+2. Stop this old nightly addon here.
+3. Install the new nightly addon [here](https://github.com/evcc-io/hassio-addon).
+4. Configure the paths for your configuration file and potentially aswell the one of the db file in the new nightly addon.
+   1. Remember to put back the db file if you extracted it like described in 1.i.
+5. Start the new nightly addon and check if everything is working. If not open an issue [here](https://github.com/evcc-io/hassio-addon/issues/new).
+6. Uninstall the old nightly addon and remove my addon repository, if you do not use any other addon I provide.
 
 <!--
 
@@ -29,9 +34,3 @@ Notes to developers after forking or using the github template feature:
 - Share your repository on the forums https://community.home-assistant.io/c/projects/9
 - Do awesome stuff!
  -->
-
-[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg?style=for-the-badge
-[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg?style=for-the-badge
-[armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg?style=for-the-badge
-[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg?style=for-the-badge
-[i386-shield]: https://img.shields.io/badge/i386-yes-green.svg?style=for-the-badge
