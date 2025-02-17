@@ -17,7 +17,7 @@ This add-on allows you to run resol-vbus [json-live-data-server](https://github.
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fdm82m%2Fhassio-addons)
 
 1. Install this add-on in your HAOS instance.
-2. Create the configuration file named `config.js` in your HAOS `/addon_configs/<slug>_resol-vbus/` folder.
+2. Create the configuration file named `config.js` in your HAOS `/addon_configs/a14d3924_resol-vbus/` folder.
    - For configuration please follow [these](https://github.com/danielwippermann/resol-vbus/tree/master/examples/json-live-data-server#configuration) instructions.
    - Sample config file can be found [here](https://raw.githubusercontent.com/danielwippermann/resol-vbus/master/examples/json-live-data-server/config.js.example).
 3. Start the add-on and check the log output.

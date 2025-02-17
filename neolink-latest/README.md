@@ -18,7 +18,7 @@ This add-on allows you to run latest Neolink directly on your HAOS instance. If 
 
 1. Install this add-on in your HAOS instance.
 2. The operating mode of Neolink defaults to `RTSP`. If you prefer `MQTT`, please change it within the add-on configuration. Or select `DUAL` if you want to use RTSP and MQTT in parallel.
-3. Create the configuration file named `neolink.toml` in your HAOS `/addon_configs/<slug>_neolink-latest/` folder.
+3. Create the configuration file named `neolink.toml` in your HAOS `/addon_configs/a14d3924_neolink-latest/` folder.
    - For configuration please follow [these](https://github.com/QuantumEntangledAndy/neolink#configuration) instructions.
    - Sample config file can be found [here](https://raw.githubusercontent.com/QuantumEntangledAndy/neolink/master/sample_config.toml).
 4. Start the add-on and check the log output.
