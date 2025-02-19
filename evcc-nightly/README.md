@@ -9,9 +9,9 @@ I have implemented an official evcc nightly support for Home Assistant in the ev
 
 # How can I migrate?
 1. Remember the paths you used in the old nightly addon for your configuration and db file, you need them in the new nightly addon.
-   1. In case that you had your db file in `/data/` (default), you need to manually extract the db file from this old addon and put it into the new nightly addon. A guide how to do that, can be found [here](https://github.com/evcc-io/hassio-addon?tab=readme-ov-file#how-to-find-and-copy-dataevccdb).
+   1. In case that you had your db file in `/data/` (default), you need to manually extract the db file from this old addon and put it into the new nightly addon. A guide how to do that, can be found [here](https://docs.evcc.io/en/docs/installation/home-assistant#how-do-i-access-the-evcc-database).
 2. Stop this old nightly addon here.
-3. Install the new nightly addon [here](https://github.com/evcc-io/hassio-addon).
+3. Install the new nightly addon [here](https://docs.evcc.io/en/docs/installation/home-assistant#installation).
 4. Configure the paths for your configuration file and potentially aswell the one of the db file in the new nightly addon.
    1. Remember to put back the db file if you extracted it like described in 1.i.
 5. Start the new nightly addon and check if everything is working. If not open an issue [here](https://github.com/evcc-io/hassio-addon/issues/new).
