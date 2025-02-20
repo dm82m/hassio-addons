@@ -7,7 +7,7 @@ MODE=$(jq --raw-output '.mode // empty' $CONFIG_PATH)
 LOG=$(jq --raw-output '.log // empty' $CONFIG_PATH)
 
 if [ -f "/homeassistant/addons/neolink.toml" ]; then
-    echo "Migrating '/homeassistant/addons/neolink.toml' to '/addon_configs/<slug>_neolink/neolink.toml'"
+    echo "Migrating '/homeassistant/addons/neolink.toml' to '/addon_configs/a14d3924_neolink/neolink.toml'"
     cp /homeassistant/addons/neolink.toml /config/
     mv /homeassistant/addons/neolink.toml /homeassistant/addons/neolink.toml.migrated
 fi
