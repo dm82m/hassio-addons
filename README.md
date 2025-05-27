@@ -13,6 +13,8 @@ This repository contains the following add-ons
 
 ### [Evcc-Nightly](./evcc-nightly)
 
+### [mydealz2rss](./mydealz2rss)
+
 ### [Neolink](./neolink)
 
 ### [Neolink-latest](./neolink-latest)
