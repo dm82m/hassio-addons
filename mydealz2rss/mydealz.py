@@ -12,21 +12,19 @@ def fetch_deals(url):
     soup = BeautifulSoup(response.content, "html.parser")
     deals = []
 
-    for article in soup.select("article.cept-thread-item"):  # Klassen koennen sich aendern!
+    for article in soup.select("article.cept-thread-item"):
         title_elem = article.select_one("a.cept-tt.thread-link")
         if not title_elem:
             continue
         title = title_elem.get("title", "").strip()
         link = title_elem['href']
        
-        # Beschreibung
         desc_elem = article.select_one(".overflow--wrap-break.width--all-12.size--all-s.space--t-2.color--text-TranslucentSecondary.hide--toW3")
         description = desc_elem.get_text(strip=True) if desc_elem else ""
 
-        # summary = str(article)
-
-        # Vue-Datenobjekt
         price = "k.A."
+        old_price = "k.A."
+        percentage = "k.A."
         temperature = "k.A."
         merchant = "k.A."
         image_url = ""
@@ -40,7 +38,6 @@ def fetch_deals(url):
                 
                 price = thread.get("price", "k.A.")
                 old_price = thread.get("nextBestPrice", "k.A.")
-                # percentage = thread.get("percentage", "k.A.")
                 temperature = round(thread.get("temperature", "k.A."))
 
                 main_image = thread.get("mainImage")
@@ -50,17 +47,28 @@ def fetch_deals(url):
                     image_ext = main_image.get("ext", "")
                     image_url = f"https://static.mydealz.de/{image_path}/{image_name}.{image_ext}"
 
-                # Haendler
                 merchant_data = thread.get("merchant")
                 merchant = merchant_data.get("merchantName", "k.A.") if merchant_data else "k.A."
+
+                user_data = thread.get("user")
+                user = user_data.get("username", "k.A.") if user_data else "k.A."
 
             except json.JSONDecodeError:
                 print("Fehler beim Parsen von data-vue2")
 
-        summary = f"<strong>Händler:</strong> {merchant}<br>" \
-          f"<strong>Preis:</strong> {price} Euro | <strong> Vgl:</strong> <s>{old_price}</s> Euro<br>" \
-          f"<strong>Temperatur:</strong> {temperature}°<br><br>" \
-          f"<strong>Beschreibung:</strong> {description}<br>"
+        if price != "k.A." and old_price != "k.A.":
+            try:
+                price_val = float(str(price).replace(",", "."))
+                old_price_val = float(str(old_price).replace(",", "."))
+                if price_val > 0 and old_price_val > 0:
+                    percentage = int(round((old_price_val - price_val) / old_price_val * 100, 0))
+            except ValueError:
+                pass
+
+        summary = f"<strong>Temperatur:</strong> {temperature}°<br>" \
+            f"<strong>Preis:</strong> {price}€ | <s>{old_price}€</s> | -{percentage}%<br>" \
+            f"<strong>Händler:</strong> {merchant} | <strong>Autor:</strong> {user}<br><br>" \
+            f"<strong>Beschreibung:</strong> {description}<br>"
         if image_url:
             summary += f'<br><img src="{image_url}" width="300">'
 
@@ -84,7 +92,6 @@ def generate_rss(deals):
     for deal in deals:
         fe = fg.add_entry()
         fe.title(deal["title"])
-        #fe.link(href=deal["link"])
         fe.guid(deal["link"], True)
         fe.description(deal["summary"])
         fe.pubDate(deal["pubDate"])
@@ -92,7 +99,7 @@ def generate_rss(deals):
         if "image" in deal:
             fe.enclosure(deal["image"], 0, "image/jpeg")
 
-    fg.rss_file("/homeassistant/www/mydealz.xml")
+    fg.rss_file("/homeassistant/www/mydealz.xml", pretty=True)
 
 if __name__ == "__main__":
     while True:
@@ -100,4 +107,4 @@ if __name__ == "__main__":
         deals_main = fetch_deals("https://www.mydealz.de/")
         generate_rss(deals_main)
         print(f"Fetched {len(deals_main)} deals. RSS feed generated. Now sleeping for 10 minutes ...")
-        time.sleep(600)  # 600 seconds = 10 minutes
+        time.sleep(600)
