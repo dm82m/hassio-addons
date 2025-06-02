@@ -84,7 +84,7 @@ def fetch_deals(url):
 
 def generate_rss(deals):
     fg = FeedGenerator()
-    fg.title("mydealz.de Deals")
+    fg.title("mydealz2rss")
     fg.link(href="https://www.mydealz.de", rel="alternate")
     fg.description("Enthält alle Deals der mydealz.de Startseite.")
     fg.language("de")
