@@ -29,9 +29,9 @@ def fetch_deals(url):
         merchant = "k.A."
         image_url = ""
 
-        vue_data_elem = article.select_one("[data-vue2]")
+        vue_data_elem = article.select_one("[data-vue3]")
         if vue_data_elem:
-            vue_data_raw = vue_data_elem.get("data-vue2", "")
+            vue_data_raw = vue_data_elem.get("data-vue3", "")
             try:
                 vue_data = json.loads(vue_data_raw)
                 thread = vue_data["props"]["thread"]
@@ -54,7 +54,7 @@ def fetch_deals(url):
                 user = user_data.get("username", "k.A.") if user_data else "k.A."
 
             except json.JSONDecodeError:
-                print("Fehler beim Parsen von data-vue2")
+                print("Fehler beim Parsen von data-vue3")
 
         if price != "k.A." and old_price != "k.A.":
             try:
