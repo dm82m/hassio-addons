@@ -93,6 +93,7 @@ def generate_rss(deals):
         fe = fg.add_entry()
         fe.title(deal["title"])
         fe.guid(deal["link"], True)
+        fe.link(href=deal["link"])
         fe.description(deal["summary"])
         fe.pubDate(deal["pubDate"])
 
