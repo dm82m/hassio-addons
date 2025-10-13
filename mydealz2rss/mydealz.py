@@ -65,12 +65,13 @@ def fetch_deals(url):
             except ValueError:
                 pass
 
-        summary = f"<strong>Temperatur:</strong> {temperature}°<br>" \
+        summary = None
+        if image_url:
+            summary = f'<img src="{image_url}" width="300"><br>'
+        summary += f"<strong>Temperatur:</strong> {temperature}°<br>" \
             f"<strong>Preis:</strong> {price}€ | <s>{old_price}€</s> | -{percentage}%<br>" \
             f"<strong>Händler:</strong> {merchant} | <strong>Autor:</strong> {user}<br><br>" \
             f"<strong>Beschreibung:</strong> {description}<br>"
-        if image_url:
-            summary += f'<br><img src="{image_url}" width="300">'
 
         deals.append({
             "title": title,
