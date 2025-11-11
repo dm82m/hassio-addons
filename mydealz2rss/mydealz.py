@@ -27,8 +27,6 @@ def fetch_deals(url):
         old_price = "k.A."
         percentage = "k.A."
         merchant = "k.A."
-        user = "k.A."
-        description = ""
         image_url = ""
         summary = ""
 
