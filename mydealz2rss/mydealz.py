@@ -22,12 +22,15 @@ def fetch_deals(url):
         desc_elem = article.select_one(".overflow--wrap-break.width--all-12.size--all-s.space--t-2.color--text-TranslucentSecondary.hide--toW3")
         description = desc_elem.get_text(strip=True) if desc_elem else ""
 
+        temperature = "k.A."
         price = "k.A."
         old_price = "k.A."
         percentage = "k.A."
-        temperature = "k.A."
         merchant = "k.A."
+        user = "k.A."
+        description = ""
         image_url = ""
+        summary = ""
 
         vue_data_elem = article.select_one("[data-vue3]")
         if vue_data_elem:
@@ -65,7 +68,6 @@ def fetch_deals(url):
             except ValueError:
                 pass
 
-        summary = None
         if image_url:
             summary = f'<img src="{image_url}" width="300"><br>'
         summary += f"<strong>Temperatur:</strong> {temperature}°<br>" \
