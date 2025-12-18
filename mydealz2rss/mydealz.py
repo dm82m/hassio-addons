@@ -8,7 +8,13 @@ import time
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 
 def fetch_deals(url):
-    response = requests.get(url, headers=HEADERS)
+    try:
+        response = requests.get(url, headers=HEADERS, timeout=15)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"Request error: {e}. Will retry later.")
+        return []
+
     soup = BeautifulSoup(response.content, "html.parser")
     deals = []
 
@@ -63,7 +69,7 @@ def fetch_deals(url):
                 old_price_val = float(str(old_price).replace(",", "."))
                 if price_val > 0 and old_price_val > 0:
                     percentage = int(round((old_price_val - price_val) / old_price_val * 100, 0))
-            except ValueError:
+            except (ValueError, TypeError):
                 pass
 
         if image_url:
@@ -105,8 +111,14 @@ def generate_rss(deals):
 
 if __name__ == "__main__":
     while True:
-        print("Fetching deals of mydealz main page ...")
-        deals_main = fetch_deals("https://www.mydealz.de/")
-        generate_rss(deals_main)
-        print(f"Fetched {len(deals_main)} deals. RSS feed generated. Now sleeping for 10 minutes ...")
+        try:
+            print("Fetching deals of mydealz main page ...")
+            deals_main = fetch_deals("https://www.mydealz.de/")
+            if deals_main:
+                generate_rss(deals_main)
+                print(f"Fetched {len(deals_main)} deals. RSS feed generated. Now sleeping for 10 minutes ...")
+            else:
+                print("No deals fetched this run. Will retry after sleep.")
+        except Exception as e:
+            print(f"Unhandled error: {e}. Will retry after sleep.")
         time.sleep(600)
