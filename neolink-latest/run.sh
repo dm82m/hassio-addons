@@ -13,11 +13,11 @@ if [ -f "/homeassistant/addons/neolink.toml" ]; then
 fi
 
 echo "--- VERSIONS ---"
-echo "add-on version: 0.1.0"
+echo "App version: 0.1.0"
 echo -n "neolink version: " && neolink --version
 echo "neolink mode: ${MODE}"
 echo "neolink log: ${LOG}"
-echo "ATTENTION: if you expected a newer Neolink version, please reinstall this Add-on!"
+echo "ATTENTION: if you expected a newer Neolink version, please reinstall this App!"
 echo "--- Neolink ---"
 
 case $LOG in

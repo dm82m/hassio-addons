@@ -9,7 +9,7 @@ fi
 cd /bin/resol-vbus/examples/json-live-data-server
 cp /config/config.js .
 echo "--- VERSIONS ---"
-echo "add-on version: 0.0.8"
+echo "App version: 0.0.8"
 echo -n "nodejs version: " && node --version
 echo -n "npm version: " && npm --version
 echo "--- DEVICES ---"

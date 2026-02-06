@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir \
     beautifulsoup4 \
     lxml
 
-# Copy data for add-on
+# Copy data for App
 COPY mydealz.py /
 COPY run.sh /
 RUN chmod a+x /run.sh

@@ -5,7 +5,7 @@ RUN apt-get update && \
         jq && \
     apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-# Copy data for add-on
+# Copy data for App
 COPY run.sh /
 RUN chmod a+x /run.sh
 
