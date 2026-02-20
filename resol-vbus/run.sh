@@ -6,8 +6,8 @@ if [ -f "/homeassistant/addons/config.js" ]; then
     mv /homeassistant/addons/config.js /homeassistant/addons/config.js.migrated
 fi
 
-cd /bin/resol-vbus/examples/json-live-data-server
-cp /config/config.js .
+cd /bin/resol-vbus/examples/json-live-data-server || exit
+cp /config/config.js . || exit
 echo "--- VERSIONS ---"
 echo "App version: 0.0.10"
 echo -n "nodejs version: " && node --version

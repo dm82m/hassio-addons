@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         # Hier alle deine Add-on-Ordnernamen eintragen!
-        addon: ['mydealz2rss', 'neolink', 'neolink-latest', 'resol-vbus'] 
+        addon: ['mydealz2rss', 'neolink', 'neolink-latest', 'resol-vbus']
     steps:
       - name: ⬇️ Code auschecken
         uses: actions/checkout@v6.0.2
@@ -29,7 +29,7 @@ jobs:
     steps:
       - name: ⬇️ Code auschecken
         uses: actions/checkout@v6.0.2
-      
+
       - name: 🐚 ShellCheck ausführen
         uses: ludeeus/action-shellcheck@master
         with:
@@ -41,6 +41,6 @@ jobs:
     steps:
       - name: ⬇️ Code auschecken
         uses: actions/checkout@v6.0.2
-        
+
       - name: 📝 yamllint ausführen
         uses: ibiqlik/action-yamllint@v3.1.1
