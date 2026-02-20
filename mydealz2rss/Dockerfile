@@ -1,17 +1,18 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
-RUN apt-get update && \
-    apt-get install -y \
-        python \
-        pip && \
-    apt-get clean -y && rm -rf /var/lib/apt/lists/*
+ARG FEEDGEN2_VERSION="2.0.1"
 
-RUN pip install --no-cache-dir \
-    feedgen \
-    requests \
-    beautifulsoup4 \
-    lxml
+# Install the stuff we need
+RUN apk add --no-cache \
+        python3 \
+        py3-pip \
+        py3-lxml \
+        py3-requests \
+        py3-beautifulsoup4
+
+RUN pip install --no-cache-dir --break-system-packages \
+        feedgen2==${FEEDGEN2_VERSION}
 
 # Copy data for App
 COPY mydealz.py /
