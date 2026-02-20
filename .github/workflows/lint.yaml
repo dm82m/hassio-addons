@@ -1,0 +1,46 @@
+name: Linting
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  addon-linter:
+    name: 📦 HA Add-on Linter (${{ matrix.addon }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Hier alle deine Add-on-Ordnernamen eintragen!
+        addon: ['mydealz2rss', 'neolink', 'neolink-latest', 'resol-vbus'] 
+    steps:
+      - name: ⬇️ Code auschecken
+        uses: actions/checkout@v6.0.2
+
+      - name: 🚀 Add-on Linter ausführen
+        uses: frenck/action-addon-linter@v2.21.0
+        with:
+          path: "./${{ matrix.addon }}"
+
+  shellcheck:
+    name: 🐚 ShellCheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Code auschecken
+        uses: actions/checkout@v6.0.2
+      
+      - name: 🐚 ShellCheck ausführen
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: './'
+
+  yamllint:
+    name: 📝 YAML Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Code auschecken
+        uses: actions/checkout@v6.0.2
+        
+      - name: 📝 yamllint ausführen
+        uses: ibiqlik/action-yamllint@v3.1.1
