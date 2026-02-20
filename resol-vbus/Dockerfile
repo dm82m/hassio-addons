@@ -1,16 +1,18 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
-  
-RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash -
 
-RUN apt-get -y install \
-  git \
-  nodejs
+RUN apk add --no-cache \
+    git \
+    nodejs \
+    npm \
+    bash
 
 WORKDIR /bin
 RUN git clone https://github.com/danielwippermann/resol-vbus.git
+
 WORKDIR /bin/resol-vbus
 RUN npm install
+
 WORKDIR /bin/resol-vbus/examples/json-live-data-server
 RUN npm install
 
