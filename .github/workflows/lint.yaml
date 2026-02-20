@@ -45,3 +45,22 @@ jobs:
 
       - name: 📝 yamllint ausführen
         uses: ibiqlik/action-yamllint@v3.1.1
+
+  python-lint:
+    name: 🐍 Python Lint & Format (Ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Code auschecken
+        uses: actions/checkout@v6.0.2
+
+      - name: 🚀 Ruff Check
+        uses: astral-sh/ruff-action@v3.6.1
+        with:
+          # 'check' sucht nach Fehlern (wie Flake8)
+          args: "check"
+
+      - name: 📏 Ruff Format
+        uses: astral-sh/ruff-action@v3.6.1
+        with:
+          # 'format --check' prüft, ob der Code ordentlich formatiert ist
+          args: "format --check"
