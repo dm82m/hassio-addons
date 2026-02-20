@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bashio
+#!/bin/bash
 
 if [ -f "/homeassistant/addons/config.js" ]; then
     echo "Migrating '/homeassistant/addons/config.js' to '/addon_configs/a14d3924_resol-vbus/config.js'"

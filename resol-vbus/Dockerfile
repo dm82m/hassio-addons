@@ -1,11 +1,7 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM node:24-alpine
 
-# Installing stuff we need
 RUN apk add --no-cache \
     git \
-    nodejs \
-    npm \
     bash
 
 WORKDIR /bin
