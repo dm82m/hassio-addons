@@ -1,6 +1,7 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
+# Installing stuff we need
 RUN apk add --no-cache \
     git \
     nodejs \
