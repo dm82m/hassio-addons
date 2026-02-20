@@ -11,6 +11,7 @@ RUN apk add --no-cache \
         py3-requests \
         py3-beautifulsoup4
 
+# We fix the use of feedgen2 version
 RUN pip install --no-cache-dir --break-system-packages \
         feedgen2==${FEEDGEN2_VERSION}
 
