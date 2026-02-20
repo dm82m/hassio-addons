@@ -1,0 +1,58 @@
+name: Auto Bump Addon Version (Multi-Addon)
+
+on:
+  push:
+    branches: [ main ]
+    # Reagiert auf Dockerfile-Änderungen in jedem Unterordner
+    paths:
+      - '**/Dockerfile'
+
+jobs:
+  bump-version:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6.0.2
+        with:
+          fetch-depth: 2 # Wichtig, um Änderungen zu vergleichen
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v47.0.4
+        with:
+          files: "**/Dockerfile"
+
+      - name: Update versions
+        run: |
+          # Konfiguration für Git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Schleife über alle geänderten Dockerfiles
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            # Extrahiere den Verzeichnisnamen (z.B. "addon-1")
+            dir=$(dirname "$file")
+            
+            if [ -f "$dir/config.yaml" ]; then
+              echo "Bumping version in $dir"
+              
+              # Aktuelle Version extrahieren
+              OLD_VERSION=$(grep -oP 'version: "\K[^"]+' "$dir/config.yaml")
+              
+              # Version splitten und Patch erhöhen
+              IFS='.' read -r major minor patch <<< "$OLD_VERSION"
+              NEW_VERSION="$major.$minor.$((patch + 1))"
+              
+              # In config.yaml schreiben
+              sed -i "s/version: \"$OLD_VERSION\"/version: \"$NEW_VERSION\"/g" "$dir/config.yaml"
+              
+              git add "$dir/config.yaml"
+            fi
+          done
+
+          # Nur committen, wenn es Änderungen gibt
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: bump addon versions [skip ci]"
+            git push
+          fi
