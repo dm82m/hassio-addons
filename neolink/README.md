@@ -8,6 +8,11 @@
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
 
+> [!CAUTION]
+> This addon is still under support, but the upstream project **Neolink** (by original author [thirtythreeforty](https://github.com/thirtythreeforty) and forked by [QuantumEntangledAndy](https://github.com/QuantumEntangledAndy)) is **abandoned**.
+>
+> Expect this addon to stop working at any time!
+
 ## About
 
 This App allows you to run Neolink directly on your HAOS instance. If you don't know Neolink you might not need this aApp. Details can be found [here](https://github.com/QuantumEntangledAndy/neolink). This App uses the Neolink fork of @QuantumEntangledAndy which also supports MQTT.
