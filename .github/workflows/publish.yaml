@@ -1,0 +1,57 @@
+name: Publish Add-ons
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**/config.yaml'
+  workflow_dispatch:
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    outputs:
+      changed_addons: ${{ steps.set-matrix.outputs.addons }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+        with:
+          fetch-depth: 2
+
+      - name: Get changed addons
+        id: set-matrix
+        run: |
+          # Findet alle Ordner, die eine config.yaml enthalten und sich geändert haben
+          CHANGED=$(git diff --name-only HEAD^ HEAD | grep / | cut -d/ -f1 | uniq | xargs -I {} sh -c 'if [ -f {}/config.yaml ]; then echo "{}"; fi' | jq -R -s -c 'split("\n")[:-1]')
+          echo "addons=$CHANGED" >> $GITHUB_OUTPUT
+
+  publish:
+    needs: init
+    if: ${{ needs.init.outputs.changed_addons != '[]' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      matrix:
+        addon: ${{FromJson(needs.init.outputs.changed_addons)}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3.7.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Publish
+        uses: home-assistant/builder@master
+        with:
+          args: |
+            --amd64 \
+            --aarch64 \
+            --target ${{ matrix.addon }} \
+            --image "{arch}-app-${{ matrix.addon }}" \
+            --docker-hub ghcr.io/dm82m

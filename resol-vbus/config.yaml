@@ -2,6 +2,7 @@ name: "Resol-VBus"
 description: "Will run json-live-data-server as App in HAOS"
 version: "0.0.10"
 slug: "resol-vbus"
+image: "ghcr.io/dm82m/{arch}-app-resol-vbus"
 init: false
 arch:
   - aarch64
