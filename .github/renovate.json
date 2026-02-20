@@ -1,0 +1,41 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":separateMajorReleases",
+    ":combinePatchMinorReleases"
+  ],
+  "enabledManagers": [
+    "dockerfile",
+    "github-actions",
+    "custom.regex"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^mydealz2rss/Dockerfile$/"
+      ],
+      "matchStrings": [
+        "ARG FEEDGEN2_VERSION=\"(?<currentValue>[\\d.]+)\""
+      ],
+      "datasourceTemplate": "pypi",
+      "depNameTemplate": "feedgen2"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "feedgen2"
+      ],
+      "groupName": "Python Feedgen2"
+    },
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "groupName": "GitHub Actions",
+      "automerge": true
+    }
+  ]
+}
