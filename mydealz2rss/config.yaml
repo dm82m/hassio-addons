@@ -1,6 +1,6 @@
 name: "mydealz2rss"
 description: "Scrapes all deals from mydealz.de main page every 10 minutes and publishes them at `<your_ha_instance>/local/mydealz.xml` in RSS format."
-version: "0.0.8"
+version: "0.0.9"
 slug: "mydealz2rss"
 init: false
 arch:
