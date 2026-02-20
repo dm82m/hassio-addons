@@ -7,6 +7,7 @@ import time
 
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 
+
 def fetch_deals(url):
     try:
         response = requests.get(url, headers=HEADERS, timeout=15)
@@ -23,9 +24,11 @@ def fetch_deals(url):
         if not title_elem:
             continue
         title = title_elem.get("title", "").strip()
-        link = title_elem['href']
-       
-        desc_elem = article.select_one(".overflow--wrap-break.width--all-12.size--all-s.space--t-2.color--text-TranslucentSecondary.hide--toW3")
+        link = title_elem["href"]
+
+        desc_elem = article.select_one(
+            ".overflow--wrap-break.width--all-12.size--all-s.space--t-2.color--text-TranslucentSecondary.hide--toW3"
+        )
         description = desc_elem.get_text(strip=True) if desc_elem else ""
 
         temperature = "k.A."
@@ -42,7 +45,7 @@ def fetch_deals(url):
             try:
                 vue_data = json.loads(vue_data_raw)
                 thread = vue_data["props"]["thread"]
-                
+
                 price = thread.get("price", "k.A.")
                 old_price = thread.get("nextBestPrice", "k.A.")
                 temperature = round(thread.get("temperature", "k.A."))
@@ -55,7 +58,11 @@ def fetch_deals(url):
                     image_url = f"https://static.mydealz.de/{image_path}/{image_name}.{image_ext}"
 
                 merchant_data = thread.get("merchant")
-                merchant = merchant_data.get("merchantName", "k.A.") if merchant_data else "k.A."
+                merchant = (
+                    merchant_data.get("merchantName", "k.A.")
+                    if merchant_data
+                    else "k.A."
+                )
 
                 user_data = thread.get("user")
                 user = user_data.get("username", "k.A.") if user_data else "k.A."
@@ -68,26 +75,33 @@ def fetch_deals(url):
                 price_val = float(str(price).replace(",", "."))
                 old_price_val = float(str(old_price).replace(",", "."))
                 if price_val > 0 and old_price_val > 0:
-                    percentage = int(round((old_price_val - price_val) / old_price_val * 100, 0))
+                    percentage = int(
+                        round((old_price_val - price_val) / old_price_val * 100, 0)
+                    )
             except (ValueError, TypeError):
                 pass
 
         if image_url:
             summary = f'<img src="{image_url}" width="300"><br>'
-        summary += f"<strong>Temperatur:</strong> {temperature}°<br>" \
-            f"<strong>Preis:</strong> {price}€ | <s>{old_price}€</s> | -{percentage}%<br>" \
-            f"<strong>Händler:</strong> {merchant} | <strong>Autor:</strong> {user}<br><br>" \
+        summary += (
+            f"<strong>Temperatur:</strong> {temperature}°<br>"
+            f"<strong>Preis:</strong> {price}€ | <s>{old_price}€</s> | -{percentage}%<br>"
+            f"<strong>Händler:</strong> {merchant} | <strong>Autor:</strong> {user}<br><br>"
             f"<strong>Beschreibung:</strong> {description}<br>"
+        )
 
-        deals.append({
-            "title": title,
-            "link": link,
-            "summary": summary,
-            "image": image_url,
-            "pubDate": datetime.now(timezone.utc)
-        })
+        deals.append(
+            {
+                "title": title,
+                "link": link,
+                "summary": summary,
+                "image": image_url,
+                "pubDate": datetime.now(timezone.utc),
+            }
+        )
 
     return deals
+
 
 def generate_rss(deals):
     fg = FeedGenerator()
@@ -109,6 +123,7 @@ def generate_rss(deals):
 
     fg.rss_file("/homeassistant/www/mydealz.xml", pretty=True)
 
+
 if __name__ == "__main__":
     while True:
         try:
@@ -116,7 +131,9 @@ if __name__ == "__main__":
             deals_main = fetch_deals("https://www.mydealz.de/")
             if deals_main:
                 generate_rss(deals_main)
-                print(f"Fetched {len(deals_main)} deals. RSS feed generated. Now sleeping for 10 minutes ...")
+                print(
+                    f"Fetched {len(deals_main)} deals. RSS feed generated. Now sleeping for 10 minutes ..."
+                )
             else:
                 print("No deals fetched this run. Will retry after sleep.")
         except Exception as e:
