@@ -23,36 +23,39 @@ jobs:
         with:
           files: "**/Dockerfile"
 
-      - name: Update versions
+      - name: Update versions (config.yaml and run.sh)
         run: |
-          # Konfiguration für Git
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Schleife über alle geänderten Dockerfiles
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            # Extrahiere den Verzeichnisnamen (z.B. "addon-1")
             dir=$(dirname "$file")
             
             if [ -f "$dir/config.yaml" ]; then
-              echo "Bumping version in $dir"
+              echo "Processing addon in $dir"
               
-              # Aktuelle Version extrahieren
+              # 1. Version aus config.yaml extrahieren
               OLD_VERSION=$(grep -oP 'version: "\K[^"]+' "$dir/config.yaml")
               
-              # Version splitten und Patch erhöhen
+              # 2. Patch-Level erhöhen
               IFS='.' read -r major minor patch <<< "$OLD_VERSION"
               NEW_VERSION="$major.$minor.$((patch + 1))"
               
-              # In config.yaml schreiben
+              # 3. Update config.yaml
               sed -i "s/version: \"$OLD_VERSION\"/version: \"$NEW_VERSION\"/g" "$dir/config.yaml"
-              
               git add "$dir/config.yaml"
+
+              # 4. Update run.sh (falls vorhanden)
+              if [ -f "$dir/run.sh" ]; then
+                echo "Updating version in $dir/run.sh to $NEW_VERSION"
+                # Ersetzt die gesamte Zeile, die mit 'echo "App version:' beginnt
+                sed -i "s/echo \"App version: .*\"/echo \"App version: $NEW_VERSION\"/g" "$dir/run.sh"
+                git add "$dir/run.sh"
+              fi
             fi
           done
 
-          # Nur committen, wenn es Änderungen gibt
           if ! git diff --cached --quiet; then
-            git commit -m "chore: bump addon versions [skip ci]"
+            git commit -m "chore: bump addon version to $NEW_VERSION [skip ci]"
             git push
           fi
