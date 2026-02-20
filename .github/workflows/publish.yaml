@@ -8,7 +8,11 @@ on:
   workflow_dispatch:
 
 jobs:
+  linting:
+    uses: ./.github/workflows/lint.yaml
+
   init:
+    needs: linting
     runs-on: ubuntu-latest
     outputs:
       changed_addons: ${{ steps.set-matrix.outputs.addons }}
