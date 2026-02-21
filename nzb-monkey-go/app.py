@@ -1,6 +1,13 @@
 import streamlit as st
 import subprocess
 import os
+import base64
+
+
+def get_base64_img(path):
+    with open(path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
 
 st.set_page_config(page_title="NZB-Monkey-Go Web UI", page_icon="🐒", layout="wide")
 
@@ -9,9 +16,20 @@ tab1, tab2 = st.tabs(["🚀 Process Links", "⚙️ Configuration"])
 
 # --- TAB 1: LINKS VERARBEITEN ---
 with tab1:
-    col1, col2 = st.columns([1, 8], vertical_alignment="center")
-    col1.image("icon.png", width=60)
-    col2.title("NZB-Monkey-Go")
+    try:
+        img_data = get_base64_img("icon.png")
+
+        st.markdown(
+            f"""
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                <img src="data:image/png;base64,{img_data}" style="width: 55px; height: 55px; margin-right: 15px; border-radius: 8px;">
+                <h1 style="margin: 0; padding: 0; line-height: 1;">NZB-Monkey-Go</h1>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    except FileNotFoundError:
+        st.title("🐒 NZB-Monkey-Go")  # Fallback falls Bild fehlt
 
     mode = st.radio("Select Mode:", ("Standard", "Direct Search"), horizontal=True)
     script = "/n.sh" if mode == "Standard" else "/nd.sh"

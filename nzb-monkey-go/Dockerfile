@@ -19,9 +19,10 @@ RUN if [ "${BUILD_ARCH}" = "aarch64" ]; then ARCH="arm64"; \
     chmod +x nzb-monkey-go && \
     rm *.zip
 
-# Copy scripts into container
+# Copy scripts and app into container
 COPY run.sh app.py n.sh nd.sh icon.png /
 RUN chmod a+x /run.sh /n.sh /nd.sh
+COPY .streamlit/config.toml /root/.streamlit/config.toml
 
 EXPOSE 8501
 

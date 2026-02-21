@@ -1,0 +1,19 @@
+[theme]
+# Die Primärfarbe für Knöpfe, Slider und aktive Elemente (Passend zum Blau im Logo)
+primaryColor = "#58b9e5"
+
+# Hintergrundfarbe der Hauptseite (Dunkel für HA-Look)
+backgroundColor = "#111111"
+
+# Hintergrundfarbe der Sidebar und von Eingabefeldern
+secondaryBackgroundColor = "#1f1f1f"
+
+# Textfarbe
+textColor = "#e1e1e1"
+
+# Schriftart
+font = "sans serif"
+
+[browser]
+# Telemetrie deaktivieren
+gatherUsageStats = false
