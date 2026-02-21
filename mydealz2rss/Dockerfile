@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir --break-system-packages \
         feedgen2==${FEEDGEN2_VERSION}
 
 # Copy data for App
-COPY mydealz.py /
+COPY src/mydealz.py /usr/src/app/mydealz.py
 COPY run.sh /
 RUN chmod a+x /run.sh
 
