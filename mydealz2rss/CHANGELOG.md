@@ -1,0 +1,13 @@
+# Changelog
+
+## 0.0.9
+
+### Changes
+
+- docu updates
+- manual release workflow and changed naming of docker releases
+- fixing lint errors
+- fixing linting errors
+- switch to own docker images instead of local building
+- increased version of run.sh to match the new version of the addon
+
