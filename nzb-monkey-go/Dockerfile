@@ -15,14 +15,17 @@ RUN if [ "${BUILD_ARCH}" = "aarch64" ]; then ARCH="arm64"; \
     elif [ "${BUILD_ARCH}" = "amd64" ]; then ARCH="amd64"; \
     else echo "Unsupported arch: ${BUILD_ARCH}" && exit 1; fi && \
     wget https://github.com/Tensai75/nzb-monkey-go/releases/download/${NZB_MONKEY_VERSION}/nzb-monkey-go_${NZB_MONKEY_VERSION}-linux-${ARCH}.zip && \
-    unzip *.zip && \
-    chmod +x nzb-monkey-go && \
+    unzip *.zip -d /usr/bin/ && \
+    chmod +x /usr/bin/nzb-monkey-go && \
     rm *.zip
 
 # Copy scripts and app into container
-COPY run.sh app.py n.sh nd.sh icon.png /
-RUN chmod a+x /run.sh /n.sh /nd.sh
-COPY .streamlit/config.toml /root/.streamlit/config.toml
+COPY .streamlit/ /root/.streamlit/
+COPY src/ /usr/src/app/
+COPY icon.png /usr/src/app/
+COPY scripts/ /usr/bin/
+COPY run.sh /
+RUN chmod a+x /run.sh /usr/bin/n.sh /usr/bin/nd.sh
 
 EXPOSE 8501
 

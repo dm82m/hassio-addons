@@ -17,7 +17,7 @@ tab1, tab2 = st.tabs(["🚀 Process Links", "⚙️ Configuration"])
 # --- TAB 1: LINKS VERARBEITEN ---
 with tab1:
     try:
-        img_data = get_base64_img("icon.png")
+        img_data = get_base64_img("/usr/src/app/icon.png")
 
         st.markdown(
             f"""
@@ -32,7 +32,7 @@ with tab1:
         st.title("🐒 NZB-Monkey-Go")  # Fallback falls Bild fehlt
 
     mode = st.radio("Select Mode:", ("Standard", "Direct Search"), horizontal=True)
-    script = "/n.sh" if mode == "Standard" else "/nd.sh"
+    script = "/usr/bin/n.sh" if mode == "Standard" else "/usr/bin/nd.sh"
 
     links = st.text_area(
         "Paste your NZB-Links here:", height=150, placeholder="nzblnk:..."
