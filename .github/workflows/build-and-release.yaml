@@ -1,0 +1,129 @@
+name: Build and Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      addon:
+        description: 'Which addon would you like to build/release?'
+        required: true
+        type: choice
+        options:
+          - 'mydealz2rss'
+          - 'neolink'
+          - 'neolink-latest'
+          - 'resol-vbus'
+      manual_version:
+        description: 'Target Version (e.g., 1.2.3). LEAVE EMPTY to automatically increase patch level.'
+        required: false
+        type: string
+
+jobs:
+  linting:
+    uses: ./.github/workflows/lint.yaml
+
+  release:
+    needs: linting
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Update versions and Changelog
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          dir="${{ github.event.inputs.addon }}"
+          INPUT_VERSION="${{ github.event.inputs.manual_version }}"
+
+          if [ -f "$dir/config.yaml" ]; then
+            # 1. Extract current version
+            OLD_VERSION=$(grep -oP 'version: "\K[^"]+' "$dir/config.yaml")
+
+            # 2. Find the last commit that actually changed the version string
+            LAST_VERSION_CHANGE_HASH=$(git log -S "version: \"$OLD_VERSION\"" --pretty=format:"%H" -n 1 -- "$dir/config.yaml")
+            if [ -z "$LAST_VERSION_CHANGE_HASH" ]; then
+              LAST_VERSION_CHANGE_HASH=$(git rev-list --max-parents=0 HEAD)
+            fi
+
+            # 3. Determine NEW_VERSION logic
+            if [ -n "$INPUT_VERSION" ]; then
+              echo "Manual version detected: $INPUT_VERSION"
+              NEW_VERSION="$INPUT_VERSION"
+            else
+              echo "No version entered. Auto-bumping patch level..."
+              IFS='.' read -r major minor patch <<< "$OLD_VERSION"
+              NEW_VERSION="$major.$minor.$((patch + 1))"
+            fi
+
+            # 4. Generate Simple Changelog
+            COMMITS=$(git log $LAST_VERSION_CHANGE_HASH..HEAD --pretty=format:"- %s" -- "$dir" | grep -vE "chore:|Merge branch|Merge pull request" || echo "- Technical updates")
+            NEW_SECTION="## $NEW_VERSION\n\n### Changes\n\n$COMMITS\n"
+
+            # 5. Insert into CHANGELOG.md (between Title and old Version)
+            if [ -f "$dir/CHANGELOG.md" ]; then
+              # Find line number of the first version header (starting with ##)
+              FIRST_V_LINE=$(grep -nm 1 "^## " "$dir/CHANGELOG.md" | cut -d: -f1)
+              
+              if [ -n "$FIRST_V_LINE" ]; then
+                # Insert new section before the first found ## version
+                head -n $((FIRST_V_LINE - 1)) "$dir/CHANGELOG.md" > "$dir/CHANGELOG.tmp"
+                echo -e "$NEW_SECTION" >> "$dir/CHANGELOG.tmp"
+                tail -n +$FIRST_V_LINE "$dir/CHANGELOG.md" >> "$dir/CHANGELOG.tmp"
+                mv "$dir/CHANGELOG.tmp" "$dir/CHANGELOG.md"
+              else
+                # No version header found, just append after main title
+                echo -e "\n$NEW_SECTION" >> "$dir/CHANGELOG.md"
+              fi
+            else
+              echo -e "# Changelog\n\n$NEW_SECTION" > "$dir/CHANGELOG.md"
+            fi
+            git add "$dir/CHANGELOG.md"
+
+            echo "Transitioning $dir from $OLD_VERSION to $NEW_VERSION"
+
+            # 6. Update config.yaml
+            sed -i "s/version: \"$OLD_VERSION\"/version: \"$NEW_VERSION\"/g" "$dir/config.yaml"
+            git add "$dir/config.yaml"
+
+            # 7. Update run.sh (if exists)
+            if [ -f "$dir/run.sh" ]; then
+              sed -i "s/echo \"App version: .*\"/echo \"App version: $NEW_VERSION\"/g" "$dir/run.sh"
+              git add "$dir/run.sh"
+            fi
+
+            # Commit and Push changes
+            if ! git diff --cached --quiet; then
+              git commit -m "chore: release $dir version $NEW_VERSION [skip ci]"
+              git push
+              git pull --rebase
+            else
+              echo "No changes detected, skipping git push."
+            fi
+          else
+            echo "Error: config.yaml not found in '$dir'!"
+            exit 1
+          fi
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3.7.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Publish
+        uses: home-assistant/builder@master
+        with:
+          args: |
+            --amd64 \
+            --aarch64 \
+            --target ${{ github.event.inputs.addon }} \
+            --image "${{ github.event.inputs.addon }}-{arch}" \
+            --docker-hub ghcr.io/dm82m
