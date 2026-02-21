@@ -44,6 +44,16 @@
       ],
       "datasourceTemplate": "pypi",
       "depNameTemplate": "feedgen2"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)build\\.yaml$"
+      ],
+      "matchStrings": [
+        "[a-z0-9]+:\\s*(?<depName>[\\w\\.\\-\\/]+):(?<currentValue>[\\w\\.\\-]+)"
+      ],
+      "datasourceTemplate": "docker"
     }
   ],
   "packageRules": [
@@ -71,6 +81,12 @@
         "Tensai75/nzb-monkey-go"
       ],
       "groupName": "NZB-Monkey-Go"
+    },
+    {
+      "matchPackagePrefixes": [
+        "ghcr.io/home-assistant/"
+      ],
+      "groupName": "Home Assistant Base Images"
     }
   ]
 }
