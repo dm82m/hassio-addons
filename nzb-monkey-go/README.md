@@ -3,21 +3,27 @@
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/dm82m/hassio-addons?style=flat)](https://github.com/dm82m/hassio-addons/stargazers) _Thanks to everyone having starred my repo! To star it click [here](https://github.com/dm82m/hassio-addons), then click on the star on the top right. Thanks!_
 
-# mydealz2rss
+# NZB-Monkey-Go
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
 
 ## About
 
-This App fetches all deals from mydealz.de main page and publishes them at `<your_ha_instance>/local/mydealz.xml`. You can run the App on your own and use your own stream in your prefered rss reader, alternatively you can also use my stream here: `https://feeds.feedburner.com/mydealz2rss`. 
+Ever wanted to have nzb-monkey-go directly accessible in your Home Assistant? Instead of finding your laptop that has it installed? And even better, so no need to use the command line but beeing able to use a lean and smart web interface? You found it! This app is exactly what you were searching for!
+
+You can copy your NZBLINKs into the input field and start processing and all the rest is done automatically.
+Also you are able to live edit your NZB-Monkey-Go configuration files. Yes we know, it is usually one file but we are providing two processing modes. One is called the 'normal' one. This one just has all the search engines. The other mode 'Direct Search' has its own configuration file and you can set all other search engines expcept the direct search to '0'. With that you are forcing NZB-Monkey-Go to use the direct search. 
 
 ## Installation & Configuration
 
 [![Open your Home Assistant instance and show the add App repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fdm82m%2Fhassio-addons)
 
 1. Install this App in your HAOS instance.
-2. Start the App and check the log output.
+2. Enable to show it in your HAOS sidebar.
+3. Start the App.
+4. Open the App and go to the 'Configuration' and place your 'nzb-monkey-go.conf' and alternatively the 'nzb-monkey-go_direct.conf'.
+5. Switch back to the 'Process Links' tab, put in your NZBLINKs and hit 'Start Processing'.
 
 <!--
 

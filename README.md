@@ -11,13 +11,15 @@
 
 This repository contains the following apps
 
-### [Evcc-Nightly](./evcc-nightly)
+### [Evcc-nightly](./evcc-nightly)
 
 ### [mydealz2rss](./mydealz2rss)
 
 ### [Neolink](./neolink)
 
 ### [Neolink-latest](./neolink-latest)
+
+### [NZB-Monkey-Go](./nzb-monkey-go)
 
 ### [Resol-VBus](./resol-vbus)
 
