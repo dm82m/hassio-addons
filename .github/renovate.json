@@ -14,6 +14,29 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
+        "/^nzb-monkey-go/Dockerfile$/"
+      ],
+      "matchStrings": [
+        "ARG STREAMLIT_VERSION=\"(?<currentValue>[\\d.]+)\""
+      ],
+      "datasourceTemplate": "pypi",
+      "depNameTemplate": "streamlit"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^nzb-monkey-go/Dockerfile$/"
+      ],
+      "matchStrings": [
+        "ARG NZB_MONKEY_VERSION=\"(?<currentValue>v?[\\d.]+)\""
+      ],
+      "depNameTemplate": "Tensai75/nzb-monkey-go",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^(?<version>v?.*)$"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
         "/^mydealz2rss/Dockerfile$/"
       ],
       "matchStrings": [
@@ -26,9 +49,15 @@
   "packageRules": [
     {
       "matchPackageNames": [
+        "streamlit"
+      ],
+      "groupName": "Python streamlit"
+    },
+    {
+      "matchPackageNames": [
         "feedgen2"
       ],
-      "groupName": "Python Feedgen2"
+      "groupName": "Python feedgen2"
     },
     {
       "matchManagers": [
@@ -36,6 +65,12 @@
       ],
       "groupName": "GitHub Actions",
       "automerge": true
+    },
+    {
+      "matchPackageNames": [
+        "Tensai75/nzb-monkey-go"
+      ],
+      "groupName": "NZB-Monkey-Go"
     }
   ]
 }

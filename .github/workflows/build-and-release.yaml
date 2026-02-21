@@ -11,6 +11,7 @@ on:
           - 'mydealz2rss'
           - 'neolink'
           - 'neolink-latest'
+          - 'nzb-monkey-go'
           - 'resol-vbus'
       manual_version:
         description: 'Target Version (e.g., 1.2.3). LEAVE EMPTY to automatically increase patch level.'
