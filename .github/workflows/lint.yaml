@@ -6,7 +6,6 @@ on:
       - main
   pull_request:
   workflow_call:
-  workflow_dispatch:
 
 jobs:
   addon-linter:
@@ -15,7 +14,7 @@ jobs:
     strategy:
       matrix:
         # Hier alle deine Add-on-Ordnernamen eintragen!
-        addon: ['mydealz2rss', 'neolink', 'neolink-latest', 'resol-vbus']
+        addon: ['mydealz2rss', 'neolink', 'neolink-latest', 'nzb-monkey-go', 'resol-vbus']
     steps:
       - name: ⬇️ Code auschecken
         uses: actions/checkout@v6.0.2
