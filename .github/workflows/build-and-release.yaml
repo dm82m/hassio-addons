@@ -71,7 +71,7 @@ jobs:
             if [ -f "$dir/CHANGELOG.md" ]; then
               # Find line number of the first version header (starting with ##)
               FIRST_V_LINE=$(grep -nm 1 "^## " "$dir/CHANGELOG.md" | cut -d: -f1)
-              
+
               if [ -n "$FIRST_V_LINE" ]; then
                 # Insert new section before the first found ## version
                 head -n $((FIRST_V_LINE - 1)) "$dir/CHANGELOG.md" > "$dir/CHANGELOG.tmp"
