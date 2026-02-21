@@ -1,6 +1,6 @@
 name: "NZB-Monkey-Go"
 description: "App for Home Assistant to use NZB-Monkey-Go inside of Home Assistant with an easy to use UI."
-version: "0.0.2"
+version: "0.0.3"
 slug: "nzb-monkey-go"
 image: "ghcr.io/dm82m/nzb-monkey-go-{arch}"
 arch:
