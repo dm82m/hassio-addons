@@ -5,14 +5,12 @@
 ### Changes
 
 - better file structure
-- fixing image version and updated renovate to also check build.yaml
-- optimizing colors and icon
-- changelog fix
 
 ## 0.0.2
 
 ### Changes
 
+- fixing image version and updated renovate to also check build.yaml
 - optimizing colors and icon
 - no usage statictics gathering; fixing logo and header title
 
