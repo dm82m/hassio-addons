@@ -1,0 +1,15 @@
+name: "NZB-Monkey-Go"
+description: "App for Home Assistant to use NZB-Monkey-Go inside of Home Assistant with an easy to use UI."
+version: "0.0.1"
+slug: "nzb-monkey-go"
+arch:
+  - aarch64
+  - amd64
+map:
+  - type: addon_config
+    read_only: False
+ingress: true
+ingress_port: 8501
+panel_icon: "mdi:language-go"
+panel_title: "NZB-Monkey-Go"
+init: false
