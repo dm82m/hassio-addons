@@ -8,9 +8,4 @@
 - switch to own docker images instead of local building
 - added abandoned notice for neolink
 - renamed add-on to App to be consistent with HA name change
-
-## 0.1.0
-
-### Changes
-
 - ATTENTION: We are now using the host network mode for this App. This helps with battery powered Reolink cams.
