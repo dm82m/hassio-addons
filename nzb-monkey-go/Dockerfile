@@ -20,7 +20,7 @@ RUN if [ "${BUILD_ARCH}" = "aarch64" ]; then ARCH="arm64"; \
     rm *.zip
 
 # Copy scripts into container
-COPY run.sh app.py n.sh nd.sh /
+COPY run.sh app.py n.sh nd.sh icon.png /
 RUN chmod a+x /run.sh /n.sh /nd.sh
 
 EXPOSE 8501

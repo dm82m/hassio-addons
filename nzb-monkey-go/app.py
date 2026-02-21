@@ -9,7 +9,14 @@ tab1, tab2 = st.tabs(["🚀 Process Links", "⚙️ Configuration"])
 
 # --- TAB 1: LINKS VERARBEITEN ---
 with tab1:
-    st.title("🐒 NZB-Monkey-Go")
+    col1, col2 = st.columns([1, 10]) # Das Logo bekommt 1/11 des Platzes
+
+    with col1:
+        # Das Bild laden. width=60 sorgt dafür, dass es klein bleibt
+        st.image("icon.png", width=60)
+
+    with col2:
+      st.title("NZB-Monkey-Go")
 
     mode = st.radio("Select Mode:", ("Standard", "Direct Search"), horizontal=True)
     script = "/n.sh" if mode == "Standard" else "/nd.sh"
