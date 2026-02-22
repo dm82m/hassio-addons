@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.4
+
+### Changes
+
+- again file strcuture optimization
+- changelog cleanup
+
 ## 0.0.3
 
 ### Changes
