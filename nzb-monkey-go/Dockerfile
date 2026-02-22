@@ -20,8 +20,8 @@ RUN if [ "${BUILD_ARCH}" = "aarch64" ]; then ARCH="arm64"; \
     rm *.zip
 
 # Copy scripts and app into container
-COPY .streamlit/ /root/.streamlit/
-COPY src/ /usr/src/app/
+COPY src/config.toml /root/.streamlit/
+COPY src/nmg-web.py /usr/src/app/
 COPY icon.png /usr/src/app/
 COPY scripts/ /usr/bin/
 COPY run.sh /
