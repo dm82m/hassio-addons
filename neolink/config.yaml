@@ -1,6 +1,6 @@
 name: "Neolink"
 description: "Will run Neolink directly as App in HAOS"
-version: "0.1.0"
+version: "0.1.1"
 slug: "neolink"
 image: "ghcr.io/dm82m/neolink-{arch}"
 arch:
