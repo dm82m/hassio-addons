@@ -3,7 +3,6 @@ description: "Will run latest Neolink directly as App in HAOS"
 version: "0.1.0"
 slug: "neolink-latest"
 image: "ghcr.io/dm82m/neolink-latest-{arch}"
-init: false
 arch:
   - aarch64
   - amd64
