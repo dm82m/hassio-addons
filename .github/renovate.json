@@ -47,8 +47,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "(^|/)build\\.yaml$"
+      "managerFilePatterns": [
+        "/(^|/)build\\.yaml$/"
       ],
       "matchStrings": [
         "[a-z0-9]+:\\s*(?<depName>[\\w\\.\\-\\/]+):(?<currentValue>[\\w\\.\\-]+)"
@@ -83,10 +83,10 @@
       "groupName": "NZB-Monkey-Go"
     },
     {
-      "matchPackagePrefixes": [
-        "ghcr.io/home-assistant/"
-      ],
-      "groupName": "Home Assistant Base Images"
+      "groupName": "Home Assistant Base Images",
+      "matchPackageNames": [
+        "ghcr.io/home-assistant/{/,}**"
+      ]
     }
   ]
 }
