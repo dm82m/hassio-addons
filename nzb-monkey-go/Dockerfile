@@ -4,7 +4,7 @@ FROM $BUILD_FROM
 ARG BUILD_ARCH
 
 ARG NZB_MONKEY_VERSION="v0.2.1"
-ARG STREAMLIT_VERSION="1.54.0"
+ARG STREAMLIT_VERSION="1.55.0"
 
 # Install the stuff we need
 RUN apk add --no-cache python3 py3-pip wget unzip gcompat ca-certificates
