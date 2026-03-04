@@ -1,6 +1,6 @@
 #!/usr/bin/env bashio
 
-echo "App version: 0.0.4"
+echo "App version: 0.0.5"
 
 export HOME=/root
 
