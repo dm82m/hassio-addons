@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.9
+
+### Changes
+
+- chore(deps): update dependency tensai75/nzb-monkey-go to v0.3.2
+
 ## 0.0.8
 
 ### Changes
