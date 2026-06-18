@@ -17,7 +17,7 @@ jobs:
         addon: ['mydealz2rss', 'neolink', 'neolink-latest', 'nzb-monkey-go', 'resol-vbus']
     steps:
       - name: ⬇️ Code auschecken
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
 
       - name: 🚀 Add-on Linter ausführen
         uses: frenck/action-addon-linter@v2.21.0
@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Code auschecken
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
 
       - name: 🐚 ShellCheck ausführen
         uses: ludeeus/action-shellcheck@master
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Code auschecken
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
 
       - name: 📝 yamllint ausführen
         uses: ibiqlik/action-yamllint@v3.1.1
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Code auschecken
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
 
       - name: 🚀 Ruff Check
         uses: astral-sh/ruff-action@v4.0.0
