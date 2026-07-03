@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.11
+
+### Changes
+
+- chore(deps): update home assistant base images to v3.24
+- changelog update
+
 ## 0.0.10
 
 ### Changes
