@@ -1,7 +1,8 @@
-import streamlit as st
-import subprocess
-import os
 import base64
+import os
+import subprocess
+
+import streamlit as st
 
 
 def get_base64_img(path):
@@ -101,7 +102,7 @@ with tab2:
                 with open(file_path, "w") as f:
                     f.write(new_content)
                 st.success(f"Successfully saved to {file_path}!")
-            except Exception as e:
+            except OSError as e:
                 st.error(f"Error saving file: {e}")
     else:
         st.error(f"File not found: {file_path}")

@@ -1,9 +1,10 @@
+import json
+import time
+from datetime import datetime, timezone
+
 import requests
 from bs4 import BeautifulSoup
 from feedgen.feed import FeedGenerator
-from datetime import datetime, timezone
-import json
-import time
 
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 
@@ -136,6 +137,6 @@ if __name__ == "__main__":
                 )
             else:
                 print("No deals fetched this run. Will retry after sleep.")
-        except Exception as e:
+        except (requests.RequestException, OSError, ValueError, TypeError) as e:
             print(f"Unhandled error: {e}. Will retry after sleep.")
         time.sleep(600)
