@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.18
+
+### Changes
+
+- fixing the newest ruff validation errors
+
 ## 0.0.17
 
 ### Changes
