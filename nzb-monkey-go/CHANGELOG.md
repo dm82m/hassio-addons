@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.25
+
+### Changes
+
+- chore(deps): update dependency streamlit to v1.66.0
+
 ## 0.0.24
 
 ### Changes
