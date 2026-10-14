@@ -6,6 +6,8 @@ on:
       - main
   pull_request:
   workflow_call:
+  schedule:
+    - cron: 0 0 * * *
 
 jobs:
   addon-linter:
