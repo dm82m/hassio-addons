@@ -97,7 +97,7 @@ def fetch_deals(url):
                 "link": link,
                 "summary": summary,
                 "image": image_url,
-                "pubDate": datetime.now(timezone.utc),
+                "pubDate": datetime.now(timezone.UTC),
             }
         )
 
