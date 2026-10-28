@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.12
+
+### Changes
+
+- chore(deps): update node.js to v26
+- changelog cleanups
+
 ## 0.0.11
 
 ### Changes
